@@ -1,10 +1,14 @@
-
 //import React from "react";
 import NavBar from "./NavBar";
 import "../css/my-mar-stu.css";
 import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function AddStudent() {
+
+const disAll = useNavigate();
+
   const [rollNo, setRollNo] = useState("");
   const [name, setName] = useState("");
   const [math, setMath] = useState("");
@@ -26,6 +30,17 @@ export default function AddStudent() {
     console.log("english--->" + english);
     console.log("fee--->" + fee);
     console.log("course--->" + course);
+
+const student = {rollNo,name,math,science,english,fee,course};
+
+axios.post("http://localhost:8080/stu/mng/add",student)
+.then((res)=>{
+console.log(res.data);
+disAll("/");
+});
+
+
+
 
 
   };
